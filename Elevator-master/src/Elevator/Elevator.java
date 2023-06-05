@@ -1,3 +1,4 @@
+/*电梯类*/
 package Elevator;
 import Task.Task;
 
@@ -28,8 +29,8 @@ public class Elevator {
         this.code = code;
         this.doorOpen = false;
         Random r = new Random();
-        this.floor  = r.nextInt(10)+1;  //构造电梯时随机楼层
-        this.target  = r.nextInt(10)+1;  //构造电梯时随机楼层
+        this.floor  = r.nextInt(10)+1;  //构造电梯时随机楼层1-10
+        this.target  = r.nextInt(10)+1;  //构造电梯时随机楼层1-10
         if(this.floor > this.target){
             this.status = "下行";
         }else if(this.floor < this.target){
@@ -37,12 +38,14 @@ public class Elevator {
         }else{
             this.status = "停止";
         }
+
         this.cmp = new Comparator<Task>() {   //设置比较器
             @Override
             public int compare(Task o1, Task o2) {
                 return o2.Priority - o1.Priority;
             }
         };
+
         this.taskQueue = new PriorityQueue<Task>(5,cmp); //初始化任务队列
         System.out.println("当前电梯"+this.code + "在"+this.floor+"层准备"+this.status+"到第"+this.target+"层");
         this.weight = 0;
@@ -103,7 +106,7 @@ public class Elevator {
                     goDown();
                 }
             }
-            System.out.println("电梯停在第"+goal+"层");
+            System.out.println("电梯"+this.code+"停在第"+goal+"层");
             this.working = false;
             this.openDoor();
             this.floor = goal;
@@ -124,15 +127,15 @@ public class Elevator {
         return this.working;
     }
 
-    public int getCode() {
+    public int getCode() {  //获取当前电梯代码
         return code;
     }
 
-    public int getTarget() {
+    public int getTarget() {  //获取目标楼层
         return target;
     }
 
-    public String getStatus() {
+    public String getStatus() { //获取当前电梯状态
         return status;
     }
 
@@ -153,19 +156,23 @@ public class Elevator {
         this.taskQueue.add(task);
      System.out.println("当前电梯"+this.code + "在"+this.floor+"层准备"+this.status+"到第"+this.target+"层");
     }
-    public void addTask(int in,int target,int Priority){
+    public void addTask(int in,int target,int Priority){   //向任务队列中添加任务
         Task task = new Task(in,target,Priority);
         this.taskQueue.add(task);
         System.out.println(this.taskQueue.isEmpty());
     }
-    public void startThread(){
-            this.workThread.start();
+    public void startThread(){     //开启线程
+        this.workThread.start();
     }
     public void setThreadJoin() throws InterruptedException {
         this.workThread.join();
     }
 
-    public void setTarget(int target) {
+    public void setTarget(int target) {  //更改目标楼层
         this.target = target;
     }
+    public Task getFirstTask(){
+        return taskQueue.peek(); //返回任务队列中第一位任务
+    }
 }
+
