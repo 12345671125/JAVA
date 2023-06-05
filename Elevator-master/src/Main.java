@@ -62,7 +62,7 @@ public class Main {
         }
         if(index != -1 && flag == 0)  //如果有电梯在同一层且方向相同
         {
-            System.out.println("情况1");
+//            System.out.println("情况1");
             for(int i = 0;i<ElevatorArr.length;i++){
                 if(ElevatorArr[i].getCode() == index)  //选择对应代号的电梯
                 {
@@ -84,7 +84,7 @@ public class Main {
         }
         if(flag  == 0) //判断是否有电梯方向相同
         {
-            System.out.println("情况2");
+//            System.out.println("情况2");
             for(int i = 0;i<ElevatorArr.length;i++){      //查看当前是否有电梯方向相同
                 if(ElevatorArr[i].getStatus() == status){
                     index = ElevatorArr[i].getCode();
@@ -117,7 +117,7 @@ public class Main {
 
         }
         if(flag == 0){  //如果以上两种情况均无,则电梯方向均不同,那么选择完成原先目标后最近的
-            System.out.println("情况3");
+//            System.out.println("情况3");
             qSort.quickSort(ElevatorArr,-1); //按目标楼层排序
             System.out.println("将调用电梯"+ElevatorArr[0].getCode());
             flag = 1; //设置标志位为任务完成
