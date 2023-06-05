@@ -1,5 +1,3 @@
-/*此类为快速排序类，用于将电梯排序，mode为1时 以电梯当前所在层排序，mode为-1时 以电梯当前目标层排序 */
-
 package Sort;
 import Elevator.Elevator;
 public class qSort {
@@ -18,13 +16,13 @@ public class qSort {
 
     private static int partition(Elevator[] ElevatorArr, int left, int right,int mode) {
         int idx = left + 1;
-        if(mode == 1){  //如果mode == 1
+        if(mode == 1){
             for (int i = idx; i <= right; i++) {
                 if (ElevatorArr[left].getFloor() > ElevatorArr[i].getFloor()) {
                     swap(ElevatorArr, i, idx++);
                 }
             }
-        }else if(mode == -1){  //如果mode == 1
+        }else if(mode == -1){
             for (int i = idx; i <= right; i++) {
                 if (ElevatorArr[left].getTarget() > ElevatorArr[i].getTarget()) {
                     swap(ElevatorArr, i, idx++);
